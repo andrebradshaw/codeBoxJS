@@ -1,4 +1,4 @@
-var YOURwebAppURL = 'https://script.google.com/macros/s/AKfycbwo17K08_1Yv5urqt9dY0Gz-oZY9_vrmSuldVQwI56IIH7G3Cc/exec';
+var YOURwebAppURL = 'YOUR_web_app_url_goes_here';
 function grouped(e, n){
   if(e != null){
     return e[n].toString();
