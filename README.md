@@ -5,4 +5,4 @@ bookmarklet provides the ability to write and execute JavaScript within a dragga
 
 # codeBox_v2
 now supports sending code to google sheets 
-now converts code into bookmarklets (also removes single line notes)
+&& converts code into bookmarklets (also removes single line notes)
