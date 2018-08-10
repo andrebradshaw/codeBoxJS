@@ -1,3 +1,4 @@
+var YOURwebAppURL = 'https://script.google.com/macros/s/AKfycbwo17K08_1Yv5urqt9dY0Gz-oZY9_vrmSuldVQwI56IIH7G3Cc/exec';
 function grouped(e, n){
   if(e != null){
     return e[n].toString();
@@ -157,11 +158,11 @@ function saveTo(){
         });
 
     }else{
-        noteArr.push(regXnote.exec(code.replace(/\n|\r/g, '')));
+        noteArr.push(code.replace(/\n|\r/g, ''));
     }
         var noteString = noteArr.toString();
         var cmnt = encodeURIComponent(code.replace(/.+(?<!:)\/\//, '')).replace(/\n|\r/g, ''); 
-        var output = 'https://script.google.com/macros/s/AKfycbwo17K08_1Yv5urqt9dY0Gz-oZY9_vrmSuldVQwI56IIH7G3Cc/exec?cd='+scrpt+'&nt='+noteString; 
+        var output = YOURwebAppURL+'?cd='+scrpt+'&nt='+noteString; 
     
         if(output.length <3890){
             window.open(output); 
