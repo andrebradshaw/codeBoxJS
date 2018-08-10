@@ -1,4 +1,3 @@
-var YOURwebAppURL = 'YOUR_web_app_url_goes_here';
 function grouped(e, n){
   if(e != null){
     return e[n].toString();
@@ -63,7 +62,7 @@ document.getElementById("btn_close").innerText = "+";
 clsBtn.style.position = "absolute";
 clsBtn.style.background = "transparent";
 clsBtn.style.display = "inline-block";
-clsBtn.style.transform = "scale(3.5, 3.5) translate(3px, -3px) rotate(45deg)";
+clsBtn.style.transform = "scale(3.5, 3.5) translate(3px, -1px) rotate(45deg)";
 clsBtn.style.borderRadius = "1em";
 clsBtn.style.padding = "0px";
 clsBtn.style.boxShadow = "0px";
@@ -161,17 +160,28 @@ function close() {
 }
 function expand(){
 var currentWidth = document.getElementById("pop_container").style.width;
-    if(currentWidth == "32%"){
+var currentHeight = document.getElementById("pop_container").style.height;    
+    if(currentWidth == "32%" && currentHeight == "50%"){
         document.getElementById("pop_container").style.width = "60%";
         this.style.transform = "scale(2.5, 2.5) translate(150px, -5px) rotate(360deg)";
         this.style.transition = "all 366ms";
         document.getElementById("pop_container").style.transition = "all 366ms";
         document.getElementById("textbox_code").focus();
-    }else{
+    }
+    if(currentWidth == "60%"){
         document.getElementById("pop_container").style.width = "32%";
-        this.style.transform = "scale(2.5, 2.5) translate(150px, -5px) rotate(90deg)";
+        document.getElementById("pop_container").style.height = "75%";
+        this.style.transform = "scale(2.5, 2.5) translate(150px, 1px) rotate(90deg)";
         this.style.transition = "all 366ms";
         document.getElementById("pop_container").style.transition = "all 366ms";
+        document.getElementById("textbox_code").focus();
+    }
+    if(currentHeight == "75%" && currentWidth == "32%"){
+        document.getElementById("pop_container").style.width = "32%";
+        document.getElementById("pop_container").style.height = "50%";
+        this.style.transform = "scale(2.5, 2.5) translate(150px, -5px) rotate(90deg)";
+        this.style.transition = "all 366ms";
+        document.getElementById("pop_container").style.transitionTimingFunction = "cubic-bezier(1,-1.12,.18,1.93)";
         document.getElementById("textbox_code").focus();
     }
 }
@@ -224,5 +234,6 @@ function convertToBookmarklet(){
     var scrpt = code.replace(regXnote, '').replace(/\n|\r/g, '');
     var encode = encodeURIComponent(scrpt);
     document.getElementById("textbox_code").value = 'javascript:(function()%7B'+encode+'%7D)()';
-
+    document.getElementById("textbox_code").select();
+    document.execCommand("copy");
 }
