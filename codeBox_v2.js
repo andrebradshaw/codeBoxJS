@@ -64,9 +64,8 @@ clsBtn.setAttribute("id", "btn_close");
 document.getElementById("btn_close").innerText = "+";
 clsBtn.style.position = "absolute";
 clsBtn.style.background = "transparent";
-
 clsBtn.style.display = "inline-block";
-clsBtn.style.transform = "scale(3.5, 3.5) translate(5px, -5px) rotate(45deg)";
+clsBtn.style.transform = "scale(3.5, 3.5) translate(3px, -5px) rotate(45deg)";
 clsBtn.style.borderRadius = "1em";
 clsBtn.style.padding = "0px";
 clsBtn.style.boxShadow = "0px";
@@ -75,7 +74,7 @@ clsBtn.style.cursor = "pointer";
 clsBtn.style.userSelect = "none";
 clsBtn.style.fontFamily = '"Courier New", monospace';
 clsBtn.style.fontWeight = "bold";
-clsBtn.style.color = "white";
+clsBtn.style.color = "Crimson";
 
 var textbox_1 = document.createElement("TEXTAREA");
 textbox_1.setAttribute("id", "textbox_code");
@@ -85,9 +84,9 @@ textbox_1.style.height = "83%";
 textbox_1.style.padding = "6px";
 textbox_1.style.border = "1px solid DarkSlateGrey";
 textbox_1.style.background = "FloralWhite";
-textbox_1.style.borderRadius = "1em";
+textbox_1.style.borderRadius = ".9em";
 textbox_1.style.display = "block";
-textbox_1.style.fontSize = "1.2em";
+textbox_1.style.fontSize = "1em";
 textbox_1.style.userSelect = "none";
 textbox_1.style.transform = "translate(0px, 5%)";
 textbox_1.style.fontFamily = '"Courier New", monospace';
@@ -130,13 +129,10 @@ function tabIs(){
     var end = this.selectionEnd;
     if(/\{\}/.exec(this.value) == "{}"){
         this.value = this.value.replace(/\{\}/, "{\n    \n}");   
-        this.selectionStart = start-2;
-        this.selectionEnd = end-2;
+        this.selectionStart = start+4;
+        this.selectionEnd = end+4;
         this.focus();
     }
-    if(event.keyCode == 9){
-       this.value = this.value.replace(start, '    ');
-    }    
 }
 
 function execute(){
