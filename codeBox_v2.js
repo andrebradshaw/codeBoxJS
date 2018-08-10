@@ -39,9 +39,7 @@ function dragElement(elmnt) {
     elmnt.style.background = "DarkSlateGrey";
   }
 }
-function close() {
-  document.body.removeChild(document.getElementById("pop_container"));
-}
+
 var cDiv = document.createElement("div");
 cDiv.setAttribute("id", "pop_container");
 document.body.appendChild(cDiv);
@@ -49,8 +47,8 @@ cDiv.style.display = "inline-block";
 cDiv.style.position = "fixed";
 cDiv.style.top = "300px";
 cDiv.style.left = "50%";
-cDiv.style.width = "35%";
-cDiv.style.height = "43%";
+cDiv.style.width = "32%";
+cDiv.style.height = "50%";
 cDiv.style.border = "1px solid DarkSlateGrey ";
 cDiv.style.background = "DarkSlateGrey";
 cDiv.style.borderRadius = "1em";
@@ -65,7 +63,7 @@ document.getElementById("btn_close").innerText = "+";
 clsBtn.style.position = "absolute";
 clsBtn.style.background = "transparent";
 clsBtn.style.display = "inline-block";
-clsBtn.style.transform = "scale(3.5, 3.5) translate(3px, -5px) rotate(45deg)";
+clsBtn.style.transform = "scale(3.5, 3.5) translate(3px, -3px) rotate(45deg)";
 clsBtn.style.borderRadius = "1em";
 clsBtn.style.padding = "0px";
 clsBtn.style.boxShadow = "0px";
@@ -75,6 +73,25 @@ clsBtn.style.userSelect = "none";
 clsBtn.style.fontFamily = '"Courier New", monospace';
 clsBtn.style.fontWeight = "bold";
 clsBtn.style.color = "Crimson";
+
+var expndBtn = document.createElement("button");
+document.getElementById("pop_container").appendChild(expndBtn);
+expndBtn.setAttribute("id", "btn_expnd");
+document.getElementById("btn_expnd").innerText = "||";
+expndBtn.style.position = "absolute";
+expndBtn.style.background = "transparent";
+expndBtn.style.display = "inline-block";
+expndBtn.style.transform = "scale(2.5, 2.5) translate(150px, -5px) rotate(90deg)";
+expndBtn.style.borderRadius = "1em";
+expndBtn.style.padding = "0px";
+expndBtn.style.boxShadow = "0px";
+expndBtn.style.border = "0px";
+expndBtn.style.cursor = "pointer";
+expndBtn.style.userSelect = "none";
+expndBtn.style.fontFamily = '"Courier New", monospace';
+expndBtn.style.fontWeight = "bold";
+expndBtn.style.color = "Crimson";
+
 
 var textbox_1 = document.createElement("TEXTAREA");
 textbox_1.setAttribute("id", "textbox_code");
@@ -97,12 +114,25 @@ evalBtn.setAttribute("id", "evalbtn_box");
 document.getElementById("evalbtn_box").innerText = "runTheCode";
 evalBtn.style.background = "DarkCyan";
 evalBtn.style.border = "1px solid DarkSlateGrey";
-evalBtn.style.width = "48%";
+evalBtn.style.width = "32%";
 evalBtn.style.height = "33px";
 evalBtn.style.borderRadius = "1em";
 evalBtn.style.cursor = "pointer";
 evalBtn.style.color = "white";
 evalBtn.style.transform = "translate(0px, 55%)";
+
+var encodeBtn = document.createElement("button");
+document.getElementById("pop_container").appendChild(encodeBtn);
+encodeBtn.setAttribute("id", "encodebtn_box");
+document.getElementById("encodebtn_box").innerText = "bookmarklet";
+encodeBtn.style.background = "DarkCyan";
+encodeBtn.style.border = "1px solid DarkSlateGrey";
+encodeBtn.style.width = "32%";
+encodeBtn.style.height = "33px";
+encodeBtn.style.borderRadius = "1em";
+encodeBtn.style.cursor = "pointer";
+encodeBtn.style.color = "white";
+encodeBtn.style.transform = "translate(6%, 55%)";
 
 var saveBtn = document.createElement("button");
 document.getElementById("pop_container").appendChild(saveBtn);
@@ -110,20 +140,41 @@ saveBtn.setAttribute("id", "savebtn_box");
 document.getElementById("savebtn_box").innerText = "saveToSheets";
 saveBtn.style.background = "DarkCyan";
 saveBtn.style.border = "1px solid DarkSlateGrey";
-saveBtn.style.width = "48%";
+saveBtn.style.width = "32%";
 saveBtn.style.height = "33px";
 saveBtn.style.borderRadius = "1em";
 saveBtn.style.cursor = "pointer";
 saveBtn.style.color = "white";
-saveBtn.style.transform = "translate(0px, 55%)";
+saveBtn.style.transform = "translate(12%, 55%)";
+
 
 dragElement(document.getElementById(("pop_container")));
 document.getElementById("evalbtn_box").addEventListener("click", execute);
+document.getElementById("encodebtn_box").addEventListener("click", convertToBookmarklet);
 document.getElementById("savebtn_box").addEventListener("click", saveTo);
 document.getElementById("btn_close").addEventListener("click", close);
+document.getElementById("btn_expnd").addEventListener("click", expand);
 textbox_1.addEventListener('keyup', tabIs);
 
-
+function close() {
+  document.body.removeChild(document.getElementById("pop_container"));
+}
+function expand(){
+var currentWidth = document.getElementById("pop_container").style.width;
+    if(currentWidth == "32%"){
+        document.getElementById("pop_container").style.width = "60%";
+        this.style.transform = "scale(2.5, 2.5) translate(150px, -5px) rotate(360deg)";
+        this.style.transition = "all 366ms";
+        document.getElementById("pop_container").style.transition = "all 366ms";
+        document.getElementById("textbox_code").focus();
+    }else{
+        document.getElementById("pop_container").style.width = "32%";
+        this.style.transform = "scale(2.5, 2.5) translate(150px, -5px) rotate(90deg)";
+        this.style.transition = "all 366ms";
+        document.getElementById("pop_container").style.transition = "all 366ms";
+        document.getElementById("textbox_code").focus();
+    }
+}
 function tabIs(){
     var start = this.selectionStart;
     var end = this.selectionEnd;
@@ -139,13 +190,14 @@ function execute(){
   var code = document.getElementById("textbox_code").value;
     eval(code);
 }
+
 function saveTo(){
     var regXnote = /(?<!:)\/\/(?!,).+?(?:\n|$)/g;
     var code = document.getElementById("textbox_code").value;
     var noteArr = [];
     var scrpt = '';
     
-    if(/function\s\w+\(|var [\w|\$]\w+\s*\=/.test(code) === true){ 
+    if(/function\s\w+\(|var [\w|\$]\w+\s*\=|alert\(/.test(code) === true){ 
         var scrpt = code.replace(regXnote, '').replace(/\n|\r/g, '');
         var cmntMatch = code.match(regXnote);
         
@@ -165,4 +217,12 @@ function saveTo(){
         }else{
             alert("   ¯\_(ツ)_/¯ \nyou exceeded the max characters");
         }
+}
+function convertToBookmarklet(){
+    var regXnote = /(?<!:)\/\/(?!,).+?(?:\n|$)/g;
+    var code = document.getElementById("textbox_code").value;
+    var scrpt = code.replace(regXnote, '').replace(/\n|\r/g, '');
+    var encode = encodeURIComponent(scrpt);
+    document.getElementById("textbox_code").value = 'javascript:(function()%7B'+encode+'%7D)()';
+
 }
