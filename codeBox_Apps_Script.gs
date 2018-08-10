@@ -1,4 +1,7 @@
-/*/this script takes an http JSONP request and sends the data to your spreadsheet/*/
+/*/
+ this script takes an http JSONP request and sends the data to your spreadsheet
+ install guide: https://youtu.be/Yevm_Ikz5Kk
+/*/
 function doGet(request) { 
  var sheetID = 'YOURsheetID_goesHere';
  var ss = SpreadsheetApp.openById(sheetID);
