@@ -1,4 +1,5 @@
-var YOURwebAppURL = 'https://script.google.com/macros/s/AKfycbwo17K08_1Yv5urqt9dY0Gz-oZY9_vrmSuldVQwI56IIH7G3Cc/exec';
+var YOURwebAppURL = 'REPLACEwithYOUR_GoogleAppsScript_webApp_url';
+
 function grouped(e, n){
   if(e != null){
     return e[n].toString();
@@ -58,8 +59,8 @@ cDiv.style.fontFamily = '"Courier New", monospace';
 
 var clsBtn = document.createElement("button");
 document.getElementById("pop_container").appendChild(clsBtn);
-clsBtn.setAttribute("id", "btn_close");
-document.getElementById("btn_close").innerText = "+";
+clsBtn.setAttribute("id", "note_btn_close");
+document.getElementById("note_btn_close").innerText = "+";
 clsBtn.style.position = "absolute";
 clsBtn.style.background = "transparent";
 clsBtn.style.display = "inline-block";
@@ -79,11 +80,11 @@ clsBtn.style.color = "Crimson";
 var expndBtn = document.createElement("button");
 document.getElementById("pop_container").appendChild(expndBtn);
 expndBtn.setAttribute("id", "btn_expnd");
-document.getElementById("btn_expnd").innerText = "=";
+document.getElementById("btn_expnd").innerText = ">";
 expndBtn.style.position = "absolute";
 expndBtn.style.background = "transparent";
 expndBtn.style.display = "inline-block";
-expndBtn.style.transform = "scale(2.5, 2.5) translate(30px, -5px) rotate(180deg)";
+expndBtn.style.transform = "scale(2.5, 2.5) translate(30px, -5px) rotate(0deg)";
 expndBtn.style.borderRadius = "1em";
 expndBtn.style.padding = "0px";
 expndBtn.style.boxShadow = "0px";
@@ -93,7 +94,6 @@ expndBtn.style.userSelect = "none";
 expndBtn.style.fontFamily = '"Courier New", monospace';
 expndBtn.style.fontWeight = "bold";
 expndBtn.style.color = "Crimson";
-
 
 var textbox_1 = document.createElement("TEXTAREA");
 textbox_1.setAttribute("id", "textbox_code");
@@ -154,47 +154,39 @@ dragElement(document.getElementById(("pop_container")));
 document.getElementById("evalbtn_box").addEventListener("click", execute);
 document.getElementById("encodebtn_box").addEventListener("click", convertToBookmarklet);
 document.getElementById("savebtn_box").addEventListener("click", saveTo);
-document.getElementById("btn_close").addEventListener("click", close);
+document.getElementById("note_btn_close").addEventListener("click", close);
 document.getElementById("btn_expnd").addEventListener("click", expand);
 textbox_1.addEventListener('keyup', tabIs);
 
 function close() {
   document.body.removeChild(document.getElementById("pop_container"));
 }
+
+
+
 function expand(){
+    function expandSwitcher(wdht,rotate){
+        document.getElementById("pop_container").style.width = wdht[0];
+        document.getElementById("pop_container").style.height = wdht[1];
+        document.getElementById("btn_expnd").style.transform = 'scale(2.5, 2.5) translate(30px, -5px) rotate('+rotate+'deg)';
+        document.getElementById("btn_expnd").style.transition = "all 366ms";
+        document.getElementById("pop_container").style.transition = "all 366ms";
+        document.getElementById("pop_container").style.transitionTimingFunction = "cubic-bezier(1,-1,.18,1.93)";
+        document.getElementById("textbox_code").focus();
+    }   
     var currentWidth = document.getElementById("pop_container").style.width;
     var currentHeight = document.getElementById("pop_container").style.height;    
     if(currentWidth == "26%" && currentHeight == "50%"){
-        document.getElementById("pop_container").style.width = "60%";
-        this.style.transform = "scale(2.5, 2.5) translate(30px, -5px) rotate(90deg)";
-        this.style.transition = "all 366ms";
-        document.getElementById("pop_container").style.transition = "all 366ms";
-        document.getElementById("textbox_code").focus();
+        expandSwitcher(["60%", "50%"], "90");
     }
     if(currentWidth == "60%"){
-        document.getElementById("pop_container").style.width = "26%";
-        document.getElementById("pop_container").style.height = "75%";
-        this.style.transform = "scale(2.5, 2.5) translate(30px, -5px) rotate(180deg)";
-        this.style.transition = "all 366ms";
-        document.getElementById("pop_container").style.transition = "all 366ms";
-        document.getElementById("textbox_code").focus();
+        expandSwitcher(["26%", "75%"], "-90");
     }
     if(currentHeight == "75%" && currentWidth == "26%"){
-        document.getElementById("pop_container").style.width = "26%";
-        document.getElementById("pop_container").style.height = "12%";
-        this.style.transform = "scale(2.5, 2.5) translate(30px, -5px) rotate(90deg)";
-        this.style.transition = "all 366ms";
-        document.getElementById("pop_container").style.transitionTimingFunction = "cubic-bezier(1,-1.12,.18,1.93)";
-        document.getElementById("textbox_code").focus();
+        expandSwitcher(["26%", "12%"], "90");
     }
     if(currentHeight == "12%" && currentWidth == "26%"){
-        document.getElementById("pop_container").style.width = "26%";
-        document.getElementById("pop_container").style.height = "50%";
-        this.style.transform = "scale(2.5, 2.5) translate(30px, -5px) rotate(180deg)";
-        this.style.transition = "all 366ms";
-        document.getElementById("pop_container").style.transition = "all 366ms";
-        document.getElementById("pop_container").style.transitionTimingFunction = "cubic-bezier(1,-1.12,.18,1.93)";
-        document.getElementById("textbox_code").focus();
+        expandSwitcher(["26%", "50%"], "0");
     }
 }
 function tabIs(){
