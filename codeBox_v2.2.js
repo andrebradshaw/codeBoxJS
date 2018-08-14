@@ -237,7 +237,7 @@ function saveTo(){
 
     var noteString = encodeURIComponent(noteArr.toString());
     var httpString = encodeURIComponent(httpArr.toString().replace(/,$/, ''));
-    var output = YOURwebAppURL+'?cd='+scrpt.replace(/\?/g, 'Kw3h')+'&nt='+noteString+'&hl='+httpString; 
+    var output = YOURwebAppURL+'?cd='+scrpt.replace(/\&/g, 'AMP3rZ').replace(/\?/g, 'Kw3h')+'&nt='+noteString+'&hl='+httpString; 
     
     if(output.length <3890){
         window.open(output); 
