@@ -170,7 +170,7 @@ textbox_1.addEventListener('keydown', (event) => {
 
 function singleLiner(){
 	var bkmark = 'javascript:(()=>{'+(textbox_1.value.replace(/\n/g, ''))+'})()';
-	var bookmarkName = /(?<=function\s+)\w+/.exec(textbox_1.value)[0];
+	var bookmarkName = reg(/(?<=function\s+)\w+|\w+(?=\s*\()/.exec(textbox_1.value),0);
 	var book = document.createElement("a");
 	document.getElementById("pop_container").appendChild(book);
 	book.setAttribute("href", bkmark);
