@@ -34,7 +34,6 @@ function dragElement() {
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
     elmnt.style.opacity = "0.85";
-    elmnt.style.background = "DarkSlateGrey";
     elmnt.style.transition = "opacity 1300ms"
   }
 
@@ -42,7 +41,6 @@ function dragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
     elmnt.style.opacity = "1";
-    elmnt.style.background = "DarkSlateGrey";
   }
 }
 
@@ -56,8 +54,8 @@ cDiv.style.top = "300px";
 cDiv.style.left = "50%";
 cDiv.style.width = "25%";
 cDiv.style.height = "43%";
-cDiv.style.border = "1px solid DarkSlateGrey ";
-cDiv.style.background = "DarkSlateGrey";
+cDiv.style.border = "1px solid Transparent";
+cDiv.style.background = "Transparent";
 cDiv.style.borderRadius = "1em";
 cDiv.style.padding = "3px";
 cDiv.style.zIndex = "10000";
@@ -105,8 +103,6 @@ textbox_1.style.height = "83%";
 textbox_1.style.padding = "6px";
 textbox_1.style.border = "1px solid DarkSlateGrey";
 textbox_1.style.background = "FloralWhite";
-textbox_1.style.borderBottomLeftRadius = "1em";
-textbox_1.style.borderBottomRightRadius = "1em";
 textbox_1.style.display = "block";
 textbox_1.style.fontSize = "1.2em";
 textbox_1.style.userSelect = "none";
@@ -118,9 +114,9 @@ evalBtn.setAttribute("id", "btn_box");
 document.getElementById("btn_box").innerText = "Execute";
 evalBtn.style.background = "DarkCyan";
 evalBtn.style.border = "1px solid DarkSlateGrey";
-evalBtn.style.width = "32%";
+evalBtn.style.width = "33%";
 evalBtn.style.height = "10%";
-evalBtn.style.borderRadius = "1em";
+evalBtn.style.borderBottomLeftRadius = "1em";
 evalBtn.style.cursor = "pointer";
 evalBtn.style.color = "white";
 
@@ -131,9 +127,8 @@ document.getElementById("btn_book").innerText = "bookmark";
 bkBtn.style.alignSelf = "left";
 bkBtn.style.background = "DarkCyan";
 bkBtn.style.border = "1px solid DarkSlateGrey";
-bkBtn.style.width = "32%";
+bkBtn.style.width = "33%";
 bkBtn.style.height = "10%";
-bkBtn.style.borderRadius = "1em";
 bkBtn.style.cursor = "pointer";
 bkBtn.style.color = "white";
 
@@ -144,9 +139,9 @@ document.getElementById("btn_save").innerText = "Save";
 saveBtn.style.alignSelf = "left";
 saveBtn.style.background = "DarkCyan";
 saveBtn.style.border = "1px solid DarkSlateGrey";
-saveBtn.style.width = "32%";
+saveBtn.style.width = "33%";
 saveBtn.style.height = "10%";
-saveBtn.style.borderRadius = "1em";
+saveBtn.style.borderBottomRightRadius = "1em";
 saveBtn.style.cursor = "pointer";
 saveBtn.style.color = "white";
 
