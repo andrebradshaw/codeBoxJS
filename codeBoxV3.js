@@ -47,14 +47,7 @@ function dragElement() {
   }
 }
 
-function close() {
-  document.body.removeChild(document.getElementById("pop_container"));
-}
 
-function nodrag() {
-  this.style.background = 'DarkCyan';
-  this.style.transition = 'all 566ms';
-}
 var cDiv = document.createElement("div");
 cDiv.setAttribute("id", "pop_container");
 document.body.appendChild(cDiv);
@@ -126,11 +119,24 @@ evalBtn.setAttribute("id", "btn_box");
 document.getElementById("btn_box").innerText = "Execute";
 evalBtn.style.background = "DarkCyan";
 evalBtn.style.border = "1px solid DarkSlateGrey";
-evalBtn.style.width = "48%";
+evalBtn.style.width = "32%";
 evalBtn.style.height = "10%";
 evalBtn.style.borderRadius = "1em";
 evalBtn.style.cursor = "pointer";
 evalBtn.style.color = "white";
+
+var bkBtn = document.createElement("button");
+document.getElementById("pop_container").appendChild(bkBtn);
+bkBtn.setAttribute("id", "btn_book");
+document.getElementById("btn_book").innerText = "bookmark";
+bkBtn.style.alignSelf = "left";
+bkBtn.style.background = "DarkCyan";
+bkBtn.style.border = "1px solid DarkSlateGrey";
+bkBtn.style.width = "32%";
+bkBtn.style.height = "10%";
+bkBtn.style.borderRadius = "1em";
+bkBtn.style.cursor = "pointer";
+bkBtn.style.color = "white";
 
 var saveBtn = document.createElement("button");
 document.getElementById("pop_container").appendChild(saveBtn);
@@ -139,27 +145,50 @@ document.getElementById("btn_save").innerText = "Save";
 saveBtn.style.alignSelf = "left";
 saveBtn.style.background = "DarkCyan";
 saveBtn.style.border = "1px solid DarkSlateGrey";
-saveBtn.style.width = "48%";
+saveBtn.style.width = "32%";
 saveBtn.style.height = "10%";
 saveBtn.style.borderRadius = "1em";
 saveBtn.style.cursor = "pointer";
 saveBtn.style.color = "white";
 
-
+cDiv.addEventListener('mouseover', expander);
 mDiv.addEventListener('mouseout', nodrag);
 mDiv.addEventListener('mouseover', dragElement);
 evalBtn.addEventListener("click", execute);
+bkBtn.addEventListener("click", singleLiner);
 saveBtn.addEventListener("click", saveme);
 clsBtn.addEventListener("click", close);
 textbox_1.addEventListener('keyup', tabIs);
-window.addEventListener('scroll', () => {
-  cDiv.style.opacity = ".77";
-});
+window.addEventListener('wheel', shrinker);
+
 textbox_1.addEventListener('keydown', (event) => {
   if (event.key == 'Tab') {
     textbox_1.value = textbox_1.value.replace(/$/, '    ');
   }
 });
+
+
+
+function singleLiner(){
+	textbox_1.value = 'javascript:('+encodeURIComponent(textbox_1.value.replace(/\n/g, ''))+')()';
+
+}
+
+
+function close() {
+  document.body.removeChild(document.getElementById("pop_container"));
+}
+
+function nodrag() {
+  this.style.background = 'DarkCyan';
+  this.style.transition = 'all 566ms';
+}
+function shrinker(){
+  cDiv.style.opacity = ".77", cDiv.style.transition = 'all 566ms';
+}
+function expander(){
+  cDiv.style.opacity = "1", cDiv.style.transition = 'all 566ms';
+}
 
 function tabIs() {
   if (/\)\s{0,1}\{\}/.test(this.value)) {
