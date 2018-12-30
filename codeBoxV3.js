@@ -1,18 +1,25 @@
-function grouped(e, n){
-  if(e != null){
+function grouped(e, n) {
+  if (e != null) {
     return e[n].toString();
-  }else{
+  } else {
     return '';
   }
 }
+
 function dragElement() {
-	var elmnt = this.parentElement;
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  this.style.background = 'CadetBlue';
+  this.style.transition = 'all 566ms';
+  var elmnt = this.parentElement;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
   if (document.getElementById(this.id)) {
     document.getElementById(this.id).onmousedown = dragMouseDown;
   } else {
     this.onmousedown = dragMouseDown;
   }
+
   function dragMouseDown(e) {
     e = e || window.event;
     pos3 = e.clientX;
@@ -20,6 +27,7 @@ function dragElement() {
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
+
   function elementDrag(e) {
     e = e || window.event;
     pos1 = pos3 - e.clientX;
@@ -32,6 +40,7 @@ function dragElement() {
     elmnt.style.background = "DarkSlateGrey";
     elmnt.style.transition = "opacity 1300ms"
   }
+
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
@@ -42,6 +51,11 @@ function dragElement() {
 
 function close() {
   document.body.removeChild(document.getElementById("pop_container"));
+}
+
+function nodrag() {
+  this.style.background = 'DarkCyan';
+  this.style.transition = 'all 566ms';
 }
 var cDiv = document.createElement("div");
 cDiv.setAttribute("id", "pop_container");
@@ -90,6 +104,7 @@ mDiv.style.borderTopLeftRadius = "1em";
 mDiv.style.borderTopRightRadius = "1em";
 mDiv.style.padding = "3px";
 mDiv.style.fontFamily = '"Courier New", monospace';
+mDiv.style.cursor = 'move';
 
 
 var textbox_1 = document.createElement("TEXTAREA");
@@ -132,26 +147,28 @@ saveBtn.style.cursor = "pointer";
 saveBtn.style.color = "white";
 
 
-
+document.getElementById("mover_div").addEventListener('mouseout', nodrag);
 document.getElementById("mover_div").addEventListener('mouseover', dragElement);
 document.getElementById("btn_box").addEventListener("click", execute);
 document.getElementById('btn_save').addEventListener("click", saveme);
 document.getElementById("btn_close").addEventListener("click", close);
 textbox_1.addEventListener('keyup', tabIs);
 
-function tabIs(){
-    if(/\)\s{0,1}\{\}/.test(this.value)){
-        this.value = this.value.replace(/\)\s{0,1}\{\}/, ") {\n   \n}");   
-        this.selectionStart = this.selectionStart-2;
-        this.selectionEnd = this.selectionEnd-2;
-        this.focus();
-    }
+function tabIs() {
+  if (/\)\s{0,1}\{\}/.test(this.value)) {
+    this.value = this.value.replace(/\)\s{0,1}\{\}/, ") {\n   \n}");
+    this.selectionStart = this.selectionStart - 2;
+    this.selectionEnd = this.selectionEnd - 2;
+    this.focus();
+  }
 }
 
-function saveme(){
-  var code = document.getElementById("textbox_code").value; 	window.open('https://script.google.com/macros/s/AKfycbyipjm86wNduqfZzXFQiAjpA6BV63wNbDL0PppW3O8rXd58qUg/exec?t='+encodeURIComponent(code));
-}
-function execute(){
+function saveme() {
   var code = document.getElementById("textbox_code").value;
-	eval(code);
+  window.open('https://script.google.com/macros/s/AKfycbyipjm86wNduqfZzXFQiAjpA6BV63wNbDL0PppW3O8rXd58qUg/exec?t=' + encodeURIComponent(code));
+}
+
+function execute() {
+  var code = document.getElementById("textbox_code").value;
+  eval(code);
 }
