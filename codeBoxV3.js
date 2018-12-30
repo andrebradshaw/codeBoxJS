@@ -1,5 +1,4 @@
 var webUrl = 'yourweburl';
-
 function getSelTable(hd) {	sel = window.getSelection();	if (sel.rangeCount && sel.getRangeAt) {		range = sel.getRangeAt(0);	}	if(hd == 'hd'){		var arrayCont = Array.from(range.commonAncestorContainer.previousElementSibling.children).map(itm=>{return JSON.parse('["'+itm.innerText.replace(/\n/g, '').replace(/\t/g, '","')+'"]');});	}else{		var arrayCont = [];    }	Array.from(range.commonAncestorContainer.children).forEach(itm=>{arrayCont.push(JSON.parse('["'+itm.innerText.replace(/\t/g, '","')+'"]'))});	return arrayCont;}
 function reg(e, n){  if(e != null){    return e[n];  }else{    return '';  }}
 function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}
@@ -228,5 +227,3 @@ function execute() {
   var code = document.getElementById("textbox_code").value;
   eval(code);
 }
-
-
