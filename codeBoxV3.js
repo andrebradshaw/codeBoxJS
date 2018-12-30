@@ -1,4 +1,5 @@
 var webUrl = 'yourweburl';
+var webUrl = 'https://script.google.com/macros/s/AKfycbyipjm86wNduqfZzXFQiAjpA6BV63wNbDL0PppW3O8rXd58qUg/exec';
 
 function getSelTable(hd) {	sel = window.getSelection();	if (sel.rangeCount && sel.getRangeAt) {		range = sel.getRangeAt(0);	}	if(hd == 'hd'){		var arrayCont = Array.from(range.commonAncestorContainer.previousElementSibling.children).map(itm=>{return JSON.parse('["'+itm.innerText.replace(/\n/g, '').replace(/\t/g, '","')+'"]');});	}else{		var arrayCont = [];    }	Array.from(range.commonAncestorContainer.children).forEach(itm=>{arrayCont.push(JSON.parse('["'+itm.innerText.replace(/\t/g, '","')+'"]'))});	return arrayCont;}
 function reg(e, n){  if(e != null){    return e[n];  }else{    return '';  }}
@@ -170,10 +171,21 @@ textbox_1.addEventListener('keydown', (event) => {
 
 
 function singleLiner(){
-	textbox_1.value = 'javascript:('+encodeURIComponent(textbox_1.value.replace(/\n/g, ''))+')()';
-
+	var bkmark = 'javascript:(()=>{'+(textbox_1.value.replace(/\n/g, ''))+'})()';
+	var bookmarkName = /(?<=function\s+)\w+/.exec(textbox_1.value)[0];
+	var book = document.createElement("a");
+	document.getElementById("pop_container").appendChild(book);
+	book.setAttribute("href", bkmark);
+	book.setAttribute("id", "bookref");
+	book.innerText = bookmarkName;
+	book.style.alignSelf = "left";
+	book.style.background = "coral";
+    book.style.width = "100%";
+    book.style.height = "10%";
+    book.style.borderRadius = "1em";
+    book.style.cursor = "pointer";
+    book.style.color = "white";
 }
-
 
 function close() {
   document.body.removeChild(document.getElementById("pop_container"));
@@ -217,3 +229,5 @@ function execute() {
   var code = document.getElementById("textbox_code").value;
   eval(code);
 }
+
+
