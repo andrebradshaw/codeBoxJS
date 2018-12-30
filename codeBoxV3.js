@@ -137,12 +137,18 @@ saveBtn.style.cursor = "pointer";
 saveBtn.style.color = "white";
 
 
-document.getElementById("mover_div").addEventListener('mouseout', nodrag);
-document.getElementById("mover_div").addEventListener('mouseover', dragElement);
-document.getElementById("btn_box").addEventListener("click", execute);
-document.getElementById('btn_save').addEventListener("click", saveme);
-document.getElementById("btn_close").addEventListener("click", close);
+mDiv.addEventListener('mouseout', nodrag);
+mDiv.addEventListener('mouseover', dragElement);
+evalBtn.addEventListener("click", execute);
+saveBtn.addEventListener("click", saveme);
+clsBtn.addEventListener("click", close);
 textbox_1.addEventListener('keyup', tabIs);
+window.addEventListener('scroll', ()=>{cDiv.style.opacity = ".77";});
+textbox_1.addEventListener('keydown', (event)=>{
+	if(event.key == 'Tab'){
+		textbox_1.value = textbox_1.value.replace(/$/, '    ');
+	}
+});
 
 function tabIs(){
     if(/\)\s{0,1}\{\}/.test(this.value)){
@@ -152,9 +158,17 @@ function tabIs(){
         this.focus();
     }
 }
+function parseNote(str){
+	var x = str.match(/(?<=\/\*).+?(?=\*\/)/g);
+	if(x != null){
+		return encodeURIComponent(Array.from(x).toString());
+    }else{
+		return '';
+	}
+}
 
 function saveme(){
-  var code = document.getElementById("textbox_code").value; 	window.open('https://script.google.com/macros/s/AKfycbyipjm86wNduqfZzXFQiAjpA6BV63wNbDL0PppW3O8rXd58qUg/exec?t='+encodeURIComponent(code));
+  var code = document.getElementById("textbox_code").value; 	window.open('https://script.google.com/macros/s/AKfycbyipjm86wNduqfZzXFQiAjpA6BV63wNbDL0PppW3O8rXd58qUg/exec?t='+encodeURIComponent(code)+'&c='+parseNote(code));
 }
 function execute(){
   var code = document.getElementById("textbox_code").value;
