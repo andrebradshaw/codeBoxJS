@@ -1,4 +1,6 @@
-var webUrl = 'yourweburl'
+var webUrl = 'yourweburl';
+
+function getSelTable(hd) {	sel = window.getSelection();	if (sel.rangeCount && sel.getRangeAt) {		range = sel.getRangeAt(0);	}	if(hd == 'hd'){		var arrayCont = Array.from(range.commonAncestorContainer.previousElementSibling.children).map(itm=>{return JSON.parse('["'+itm.innerText.replace(/\n/g, '').replace(/\t/g, '","')+'"]');});	}else{		var arrayCont = [];    }	Array.from(range.commonAncestorContainer.children).forEach(itm=>{arrayCont.push(JSON.parse('["'+itm.innerText.replace(/\t/g, '","')+'"]'))});	return arrayCont;}
 function reg(e, n){  if(e != null){    return e[n];  }else{    return '';  }}
 function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}
 
@@ -6,7 +8,7 @@ function dragElement() {
 	this.style.background = 'CadetBlue';
 	this.style.transition = 'all 566ms';
 	var elmnt = this.parentElement;
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(this.id)) {
     document.getElementById(this.id).onmousedown = dragMouseDown;
   } else {
