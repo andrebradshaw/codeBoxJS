@@ -5,15 +5,19 @@ function reg(e, n){  if(e != null){    return e[n];  }else{    return '';  }}
 function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}
 
 function dragElement() {
-	this.style.background = 'CadetBlue';
-	this.style.transition = 'all 566ms';
-	var elmnt = this.parentElement;
-	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  this.style.background = 'CadetBlue';
+  this.style.transition = 'all 566ms';
+  var elmnt = this.parentElement;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
   if (document.getElementById(this.id)) {
     document.getElementById(this.id).onmousedown = dragMouseDown;
   } else {
     this.onmousedown = dragMouseDown;
   }
+
   function dragMouseDown(e) {
     e = e || window.event;
     pos3 = e.clientX;
@@ -21,6 +25,7 @@ function dragElement() {
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
+
   function elementDrag(e) {
     e = e || window.event;
     pos1 = pos3 - e.clientX;
@@ -33,6 +38,7 @@ function dragElement() {
     elmnt.style.background = "DarkSlateGrey";
     elmnt.style.transition = "opacity 1300ms"
   }
+
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
@@ -45,9 +51,9 @@ function close() {
   document.body.removeChild(document.getElementById("pop_container"));
 }
 
-function nodrag(){
-	this.style.background = 'DarkCyan';
-	this.style.transition = 'all 566ms';
+function nodrag() {
+  this.style.background = 'DarkCyan';
+  this.style.transition = 'all 566ms';
 }
 var cDiv = document.createElement("div");
 cDiv.setAttribute("id", "pop_container");
@@ -146,34 +152,39 @@ evalBtn.addEventListener("click", execute);
 saveBtn.addEventListener("click", saveme);
 clsBtn.addEventListener("click", close);
 textbox_1.addEventListener('keyup', tabIs);
-window.addEventListener('scroll', ()=>{cDiv.style.opacity = ".77";});
-textbox_1.addEventListener('keydown', (event)=>{
-	if(event.key == 'Tab'){
-		textbox_1.value = textbox_1.value.replace(/$/, '    ');
-	}
+window.addEventListener('scroll', () => {
+  cDiv.style.opacity = ".77";
+});
+textbox_1.addEventListener('keydown', (event) => {
+  if (event.key == 'Tab') {
+    textbox_1.value = textbox_1.value.replace(/$/, '    ');
+  }
 });
 
-function tabIs(){
-    if(/\)\s{0,1}\{\}/.test(this.value)){
-        this.value = this.value.replace(/\)\s{0,1}\{\}/, ") {\n   \n}");   
-        this.selectionStart = this.selectionStart-2;
-        this.selectionEnd = this.selectionEnd-2;
-        this.focus();
-    }
-}
-function parseNote(str){
-	var x = str.match(/(?<=\/\*).+?(?=\*\/)/g);
-	if(x != null){
-		return encodeURIComponent(Array.from(x).toString());
-    }else{
-		return '';
-	}
+function tabIs() {
+  if (/\)\s{0,1}\{\}/.test(this.value)) {
+    this.value = this.value.replace(/\)\s{0,1}\{\}/, ") {\n   \n}");
+    this.selectionStart = this.selectionStart - 2;
+    this.selectionEnd = this.selectionEnd - 2;
+    this.focus();
+  }
 }
 
-function saveme(){
-  var code = document.getElementById("textbox_code").value; 	window.open(webUrl+'?t='+encodeURIComponent(code)+'&c='+parseNote(code));
+function parseNote(str) {
+  var x = str.match(/(?<=\/\*).+?(?=\*\/)/g);
+  if (x != null) {
+    return encodeURIComponent(Array.from(x).toString());
+  } else {
+    return '';
+  }
 }
-function execute(){
+
+function saveme() {
   var code = document.getElementById("textbox_code").value;
-	eval(code);
+  window.open(webUrl + '?t=' + encodeURIComponent(code) + '&c=' + parseNote(code));
+}
+
+function execute() {
+  var code = document.getElementById("textbox_code").value;
+  eval(code);
 }
