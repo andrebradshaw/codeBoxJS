@@ -105,7 +105,6 @@ textbox_1.style.borderBottomRightRadius = "1em";
 textbox_1.style.display = "block";
 textbox_1.style.fontSize = "1.2em";
 textbox_1.style.userSelect = "none";
-// textbox_1.style.transform = "translate(0px, 5%)";
 textbox_1.style.fontFamily = '"Courier New", monospace';
 
 var evalBtn = document.createElement("button");
@@ -114,12 +113,11 @@ evalBtn.setAttribute("id", "btn_box");
 document.getElementById("btn_box").innerText = "Execute";
 evalBtn.style.background = "DarkCyan";
 evalBtn.style.border = "1px solid DarkSlateGrey";
-evalBtn.style.width = "49%";
+evalBtn.style.width = "48%";
 evalBtn.style.height = "10%";
 evalBtn.style.borderRadius = "1em";
 evalBtn.style.cursor = "pointer";
 evalBtn.style.color = "white";
-// evalBtn.style.transform = "translate(0px, 55%)";
 
 var saveBtn = document.createElement("button");
 document.getElementById("pop_container").appendChild(saveBtn);
@@ -127,15 +125,15 @@ saveBtn.setAttribute("id", "btn_save");
 document.getElementById("btn_save").innerText = "Save";
 saveBtn.style.background = "DarkCyan";
 saveBtn.style.border = "1px solid DarkSlateGrey";
-saveBtn.style.width = "49%";
+saveBtn.style.width = "48%";
 saveBtn.style.height = "10%";
 saveBtn.style.borderRadius = "1em";
 saveBtn.style.cursor = "pointer";
 saveBtn.style.color = "white";
-// saveBtn.style.transform = "translate(0px, 55%)";
 
 
-document.getElementById("mover_div").addEventListener('mouseover', dragElement)
+
+document.getElementById("mover_div").addEventListener('mouseover', dragElement);
 document.getElementById("btn_box").addEventListener("click", execute);
 document.getElementById('btn_save').addEventListener("click", saveme);
 document.getElementById("btn_close").addEventListener("click", close);
@@ -156,5 +154,4 @@ function saveme(){
 function execute(){
   var code = document.getElementById("textbox_code").value;
 	eval(code);
-
 }
