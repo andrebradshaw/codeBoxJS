@@ -3,6 +3,7 @@ function getSelTable(hd) {	sel = window.getSelection();	if (sel.rangeCount && se
 function reg(e, n){  if(e != null){    return e[n];  }else{    return '';  }}
 function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}
 
+
 function dragElement() {
   this.style.background = 'CadetBlue';
   this.style.transition = 'all 566ms';
@@ -153,14 +154,15 @@ bkBtn.addEventListener("click", singleLiner);
 saveBtn.addEventListener("click", saveme);
 clsBtn.addEventListener("click", close);
 textbox_1.addEventListener('keyup', tabIs);
+textbox_1.addEventListener('keyup', utilsPlease);
 window.addEventListener('wheel', shrinker);
+
 
 textbox_1.addEventListener('keydown', (event) => {
   if (event.key == 'Tab') {
     textbox_1.value = textbox_1.value.replace(/$/, '    ');
   }
 });
-
 
 
 function singleLiner(){
@@ -194,7 +196,11 @@ function shrinker(){
 function expander(){
   cDiv.style.opacity = "1", cDiv.style.transition = 'all 566ms';
 }
-
+function utilsPlease(){
+	var arr = ["function checker(elm, type) {  if (elm != undefined) {    if (type == 'src') {     return elm.getAttribute('src');    }	if (type == 'click') {     elm.click();    }	if (type == 'href') {      return elm.href;    }    if (type == 'text') {      return elm.innerText.trim().replace(/,/g, '').replace(/\n/g, ' \\n ');    }    if (type == 'next') {      return elm;    }  } else {    return '';  }}","function reg(elm, n){if(elm != null){return elm[n];}else{return '';}}"];
+	this.value = this.value.replace(/utilsPlease/, arr[0]+'\n\n'+arr[1]);
+	this.focus();
+}
 function tabIs() {
   if (/\)\s{0,1}\{\}/.test(this.value)) {
     this.value = this.value.replace(/\)\s{0,1}\{\}/, ") {\n   \n}");
