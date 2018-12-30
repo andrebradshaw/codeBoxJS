@@ -1,3 +1,4 @@
+var webUrl = 'yourweburl'
 function reg(e, n){  if(e != null){    return e[n];  }else{    return '';  }}
 function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}
 
@@ -168,7 +169,7 @@ function parseNote(str){
 }
 
 function saveme(){
-  var code = document.getElementById("textbox_code").value; 	window.open('https://script.google.com/macros/s/AKfycbyipjm86wNduqfZzXFQiAjpA6BV63wNbDL0PppW3O8rXd58qUg/exec?t='+encodeURIComponent(code)+'&c='+parseNote(code));
+  var code = document.getElementById("textbox_code").value; 	window.open(webUrl+'?t='+encodeURIComponent(code)+'&c='+parseNote(code));
 }
 function execute(){
   var code = document.getElementById("textbox_code").value;
