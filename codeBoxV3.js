@@ -76,8 +76,21 @@ cDiv.style.padding = "3px";
 cDiv.style.zIndex = "10000";
 cDiv.style.fontFamily = '"Courier New", monospace';
 
+var mDiv = document.createElement("div");
+mDiv.setAttribute("id", "mover_div");
+document.getElementById("pop_container").appendChild(mDiv);
+mDiv.style.width = "96%";
+mDiv.style.height = "7%";
+mDiv.style.border = "1px solid DarkCyan ";
+mDiv.style.backgroundColor = 'DarkCyan';
+mDiv.style.borderTopLeftRadius = "1em";
+mDiv.style.borderTopRightRadius = "1em";
+mDiv.style.padding = "3px";
+mDiv.style.fontFamily = '"Courier New", monospace';
+mDiv.style.cursor = 'move';
+
 var clsBtn = document.createElement("button");
-document.getElementById("pop_container").appendChild(clsBtn);
+document.getElementById("mover_div").appendChild(clsBtn);
 clsBtn.setAttribute("id", "btn_close");
 document.getElementById("btn_close").innerText = "+";
 clsBtn.style.position = "absolute";
@@ -92,28 +105,40 @@ clsBtn.style.boxShadow = "0px";
 clsBtn.style.border = "0px";
 clsBtn.style.cursor = "pointer";
 clsBtn.style.userSelect = "none";
+clsBtn.style.fontSize = '1em';
 clsBtn.style.fontFamily = '"Courier New", monospace';
 clsBtn.style.fontWeight = "bold";
 clsBtn.style.color = "Crimson";
 
-var mDiv = document.createElement("div");
-mDiv.setAttribute("id", "mover_div");
-document.getElementById("pop_container").appendChild(mDiv);
-mDiv.style.width = "100%";
-mDiv.style.height = "7%";
-mDiv.style.border = "1px solid DarkCyan ";
-mDiv.style.backgroundColor = 'DarkCyan';
-mDiv.style.borderTopLeftRadius = "1em";
-mDiv.style.borderTopRightRadius = "1em";
-mDiv.style.padding = "3px";
-mDiv.style.fontFamily = '"Courier New", monospace';
-mDiv.style.cursor = 'move';
+
+var expBtn = document.createElement("button");
+document.getElementById("mover_div").appendChild(expBtn);
+expBtn.setAttribute("id", "btn_expand");
+document.getElementById("btn_expand").innerText = "-";
+expBtn.style.position = "absolute";
+expBtn.style.background = "transparent";
+expBtn.style.height = "0px";
+expBtn.style.width = "0px";
+expBtn.style.display = "inline-block";
+expBtn.style.transform = "scale(3.9, 3.9) translate(11px, -5px) rotate(0deg)";
+expBtn.style.fontSize = "1.2em";
+expBtn.style.borderRadius = "1em";
+expBtn.style.padding = "0px";
+expBtn.style.boxShadow = "0px";
+expBtn.style.border = "0px";
+expBtn.style.cursor = "pointer";
+expBtn.style.userSelect = "none";
+expBtn.style.fontSize = '1em';
+expBtn.style.fontFamily = '"Courier New", monospace';
+expBtn.style.fontWeight = "bold";
+expBtn.style.align = "right";
+expBtn.style.color = "lightgrey";
 
 
 var textbox_1 = document.createElement("TEXTAREA");
 textbox_1.setAttribute("id", "textbox_code");
 document.getElementById("pop_container").appendChild(textbox_1);
-textbox_1.style.width = "100%";
+textbox_1.style.width = "99%";
 textbox_1.style.height = "83%";
 textbox_1.style.padding = "6px";
 textbox_1.style.border = "1px solid DarkSlateGrey";
@@ -167,6 +192,7 @@ evalBtn.addEventListener("click", execute);
 bkBtn.addEventListener("click", singleLiner);
 saveBtn.addEventListener("click", saveme);
 clsBtn.addEventListener("click", close);
+expBtn.addEventListener("click", expandPop);
 textbox_1.addEventListener('keyup', tabIs);
 textbox_1.addEventListener('keyup', utilsPlease);
 window.addEventListener('wheel', shrinker);
@@ -209,6 +235,13 @@ function shrinker(){
 }
 function expander(){
   cDiv.style.opacity = "1", cDiv.style.transition = 'all 566ms';
+}
+function expandPop(){
+	if(cDiv.style.width == "25%"){
+		cDiv.style.width = "45%";
+	}else{
+		cDiv.style.width = "25%";
+	}
 }
 
 function tabIs() {
