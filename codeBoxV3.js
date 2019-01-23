@@ -8,12 +8,19 @@ function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(el
 var utilityArray = [
 	"function checker(elm, type) {  if (elm != undefined) {    if (type == 'src') {     return elm.getAttribute('src');    }	if (type == 'click') {     elm.click();    }	if (type == 'href') {      return elm.href;    }    if (type == 'text') {      return elm.innerText.trim().replace(/,/g, '');    }    if (type == 'next') {      return elm;    }  } else {    return '';  }}",
 	"function reg(elm, n){if(elm != null){return elm[n];}else{return '';}}",
-	"function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}","var ebcn = (ob, nm) => {    return ob.getElementsByClassName(nm)  };","var ebtn = (ob, nm) => {    return ob.getElementsByTagName(nm)  };"
+	"function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}",
+	"var cn = (ob, nm) => {    return ob.getElementsByClassName(nm)  };",
+	"var tn = (ob, nm) => {    return ob.getElementsByTagName(nm)  };",
+	"var nm = (ob, nm) => {    return ob.getElementsByName(nm)  };",
+	"function downloadr(arr2D, filename) {    var data = arr2D.map(itm=>{	return itm.toString().replace(/$/, '\r'); }).toString().replace(/\r,/g, '\r');    var file = new Blob([data], {type: 'data:text/plain;charset=utf-8,'});    if (window.navigator.msSaveOrOpenBlob) {        window.navigator.msSaveOrOpenBlob(file, filename + '.csv');    } else {        var a = document.createElement('a'),		url = URL.createObjectURL(file);        a.href = url;        a.download = filename + '.csv';        document.body.appendChild(a);        a.click();        setTimeout(() =>{            document.body.removeChild(a);            window.URL.revokeObjectURL(url);          }, 10);    }}"	
 	];
+
+
+
 
 function utilsPlease(){
 	var arr = '';
-	utilityArray.forEach(itm=>{ arr = arr+itm+'\n\n'});
+	utilityArray.forEach(itm=>{ arr = arr+itm+'\n'});
 	this.value = this.value.replace(/utilsPlease/i, arr);
 	this.focus();
 }
